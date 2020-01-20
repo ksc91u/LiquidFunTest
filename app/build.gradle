@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 21
-    buildToolsVersion "21.1.2"
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
 
     defaultConfig {
         applicationId "jp.ne.needtec.liquidfuntest"
-        minSdkVersion 10
-        targetSdkVersion 21
+        minSdkVersion 21
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
     }
@@ -22,70 +22,26 @@ android {
         jni.srcDirs = []
         //jni.srcDirs = ['src/main/jni'] //disable automatic ndk-build call
     }
+    flavorDimensions "abi"
     productFlavors {
 
-        'armeabi' {
-            flavorDimension "abi"
-            ndk {
-                abiFilter "armeabi"
-            }
-        }
-
         'armeabi-v7a' {
-            flavorDimension "abi"
+            dimension "abi"
             ndk {
                 abiFilter "armeabi-v7a"
             }
         }
 
         'arm64-v8a' {
-            flavorDimension "abi"
+            dimension "abi"
             ndk {
                 abiFilter "arm64-v8a"
             }
         }
-
-        'mips' {
-            flavorDimension "mips"
-            ndk {
-                abiFilter "mips"
-            }
-        }
-
-        'mips64' {
-            flavorDimension "mips64"
-            ndk {
-                abiFilter "mips64"
-            }
-        }
-
-        'x86' {
-            flavorDimension "abi"
-            ndk {
-                abiFilter "x86"
-            }
-        }
-
-        'x86_64' {
-            flavorDimension "abi"
-            ndk {
-                abiFilter "x86_64"
-            }
-        }
-
-        'fat' {
-            flavorDimension "abi"
-
-        }
     }
 
-    project.ext.versionCodes = ['armeabi':1,
-                                'armeabi-v7a':2,
-                                'arm64-v8a':3,
-                                'mips':5,
-                                'mips64':6,
-                                'x86':8,
-                                'x86_64':9] //versionCode digit for each supported ABI, with 64bit>32bit and x86>armeabi-*
+    project.ext.versionCodes = ['armeabi-v7a':2,
+                                'arm64-v8a':3] //versionCode digit for each supported ABI, with 64bit>32bit and x86>armeabi-*
 
     // make per-variant version code
     applicationVariants.all { variant ->
@@ -98,6 +54,6 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:21.0.3'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:21.0.3'
 }
